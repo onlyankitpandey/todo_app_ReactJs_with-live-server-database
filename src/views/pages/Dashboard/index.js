@@ -65,6 +65,7 @@ export default function Index() {
   const history = useHistory();
   const [todosListData, setTodoListData] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isUpdating1, setIsUpdating1] = useState(false);
   const webToken = JSON.parse(localStorage.getItem('token'));
 
   const initialState = {
@@ -109,8 +110,8 @@ export default function Index() {
   };
 
   const createTodoApiHandler = async (values) => {
+    setIsUpdating1(true);
     try {
-      setIsUpdating(true);
       const res = await axios({
         method: "POST",
         url: ApiConfig.CREATE_TODO,
@@ -124,12 +125,13 @@ export default function Index() {
       })
       if (res.data.status === 200) {
         toast.success(res.data.message)
-        setIsUpdating(false);
+        getTodoListApiHandler();
+        setIsUpdating1(false);
       }
-      setIsUpdating(false);
+      setIsUpdating1(false);
     } catch (error) {
       console.log(error);
-      setIsUpdating(false);
+      setIsUpdating1(false);
     }
   };
 
@@ -262,10 +264,10 @@ export default function Index() {
                               variant="contained"
                               color="primary"
                               size="large"
-                              disabled={isUpdating}
+                              disabled={isUpdating1}
                             >
                               Create Todo
-                              {isUpdating && <ButtonCircularProgress />}
+                              {isUpdating1 && <ButtonCircularProgress />}
                             </Button>
                           </Box>
                         </Grid>

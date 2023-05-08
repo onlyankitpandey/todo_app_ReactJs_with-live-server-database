@@ -71,6 +71,7 @@ export default function Login() {
       }
       setIsUpdating(false);
     } catch (error) {
+      toast.error(error.message)
       console.log(error);
       setIsUpdating(false);
     }

@@ -86,7 +86,7 @@ export default function SignUp() {
         setIsUpdating(false);
       }
       setIsUpdating(false);
-      toast.error(res.error.message);
+      // toast.error(res.error.message);
     } catch (error) {
       console.log(error);
       toast.error(error.message)
